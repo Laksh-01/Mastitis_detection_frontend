@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastitis Monitor Dashboard</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+</head>
+
+<body>
+  <h1>Mastitis Monitor Dashboard</h1>
+  <div class="top-container">
+    <div class="data-box">
+      <h2>Health Metrics</h2>
+      <!-- <p><strong>Months After Giving Birth:</strong> <span id="monthsAfterBirth">Waiting...</span> months <span id="monthsAfterBirthStatus" class="status-indicator"></span></p> -->
+      <p><strong>IUFL:</strong> <span id="IUFL">Waiting...</span> <span id="IUFLStatus" class="status-indicator"></span></p>
+      <p><strong>EUFL:</strong> <span id="EUFL">Waiting...</span> <span id="EUFLStatus" class="status-indicator"></span></p>
+      <p><strong>IUFR:</strong> <span id="IUFR">Waiting...</span> <span id="IUFRStatus" class="status-indicator"></span></p>
+      <p><strong>EUFR:</strong> <span id="EUFR">Waiting...</span> <span id="EUFRStatus" class="status-indicator"></span></p>
+      <p><strong>IURL:</strong> <span id="IURL">Waiting...</span> <span id="IURLStatus" class="status-indicator"></span></p>
+      <p><strong>EURL:</strong> <span id="EURL">Waiting...</span> <span id="EURLStatus" class="status-indicator"></span></p>
+      <p><strong>IURR:</strong> <span id="IURR">Waiting...</span> <span id="IURRStatus" class="status-indicator"></span></p>
+      <p><strong>EURR:</strong> <span id="EURR">Waiting...</span> <span id="EURRStatus" class="status-indicator"></span></p>
+      <p><strong>Temperature:</strong> <span id="temperature">Waiting...</span> °C <span id="temperatureStatus" class="status-indicator"></span></p>
+    </div>
+    <div class="status-box">
+      <h2>Diagnosis</h2>
+      <p><strong>Condition:</strong> <span id="classification">Waiting...</span> <span id="classificationStatus" class="status-indicator"></span></p>
+      <p><strong>Confidence:</strong> <span id="confidence">Waiting...</span> %</p>
+      <div id="suggestions" style="display: none;">
+        <h3>Suggestions for Mastitis</h3>
+        <ul>
+          <li>Consult a veterinarian immediately for a thorough examination.</li>
+          <li>Administer prescribed antibiotics as per veterinary guidance.</li>
+          <li>Ensure proper milking hygiene to prevent further infection.</li>
+          <li>Monitor the animal's temperature and behavior closely.</li>
+          <li>Provide a clean, dry, and comfortable environment.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="charts-container">
+    <div class="chart-box">
+      <h2>IUFL Trend</h2>
+      <canvas id="IUFLChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h2>EUFL Trend</h2>
+      <canvas id="EUFLChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h2>Temperature Trend</h2>
+      <canvas id="temperatureChart"></canvas>
+    </div>
+    <div class="gauge-box">
+      <h2>Months After Giving Birth Gauge</h2>
+      <canvas id="monthsAfterBirthGauge"></canvas>
+    </div>
+  </div>
+  <!-- Optional Controls Section -->
+  <!--
+  <div class="controls">
+    <h2>Send Command</h2>
+    <input type="text" id="commandInput" placeholder="Enter command">
+    <button onclick="sendCommand()">Send to ESP32</button>
+  </div>
+  -->
+  <div id="logArea">
+    <p>Logs will appear here...</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
