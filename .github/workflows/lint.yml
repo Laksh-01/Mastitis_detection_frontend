@@ -23,7 +23,6 @@ jobs:
         run: |
           npm init -y
           npm install eslint --save-dev
-          npx eslint --init --no-eslint-config
 
-      - name: Run Lint
+      - name: Run ESLint
         run: npx eslint script.js
