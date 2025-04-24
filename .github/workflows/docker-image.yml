@@ -19,4 +19,4 @@ jobs:
       run: docker build -t my-static-site:latest .
 
     - name: Push the Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/my-static-site:latest
+      run: docker push my-static-site:latest
