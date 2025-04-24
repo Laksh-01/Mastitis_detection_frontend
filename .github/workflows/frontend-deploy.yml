@@ -1,34 +1,36 @@
-name: Frontend Deployment
+name: Deploy Frontend to GitHub Pages
 
 on:
   push:
     branches: ["main"]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # This is crucial for GitHub Pages deployment
+      contents: read
       pages: write
       id-token: write
     
     steps:
-    - name: Checkout
+    - name: Checkout repository
       uses: actions/checkout@v4
-      
-    - name: Verify files
+    
+    - name: Verify files exist
       run: |
-        [ -f index.html ] && echo "index.html exists" || exit 1
-        [ -f styles.css ] && echo "style.css exists" || exit 1
-        [ -f script.js ] && echo "script.js exists" || exit 1
-        
+        ls -la
+        [ -f index.html ] || { echo "index.html missing"; exit 1; }
+        [ -f styles.css ] || { echo "style.css missing"; exit 1; }
+        [ -f script.js ] || { echo "script.js missing"; exit 1; }
+        echo "All required files present"
+    
     - name: Setup Pages
       uses: actions/configure-pages@v3
-      
+    
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v2
       with:
         path: ./
-        
+    
     - name: Deploy to GitHub Pages
       uses: actions/deploy-pages@v2
