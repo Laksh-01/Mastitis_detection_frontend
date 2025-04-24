@@ -1,0 +1,35 @@
+name: Frontend Deployment
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Verify files
+      run: |
+        ls -la
+        echo "Checking core files exist..."
+        [ -f index.html ] && echo "index.html exists" || exit 1
+        [ -f style.css ] && echo "style.css exists" || exit 1
+        [ -f script.js ] && echo "script.js exists" || exit 1
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
